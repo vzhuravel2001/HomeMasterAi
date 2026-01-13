@@ -1,0 +1,8 @@
+{
+  "name": "HomeMasterAI",
+  "description": "Smart assistant for home repairs featuring AI visual problem diagnostics, step-by-step instructions, and local hardware store locator.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
