@@ -63,5 +63,146 @@ export const TASKS: Task[] = [
         imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&q=80&w=800'
       },
     ]
+  },
+  {
+    id: 't2',
+    categoryId: 'plumbing',
+    title: 'Замена кухонного смесителя',
+    difficulty: 'Medium',
+    estimatedTime: '45 мин',
+    tools: ['Разводной ключ', 'Набор рожковых ключей', 'Фонарик', 'Тряпка'],
+    materials: ['Новый смеситель', 'Гибкие подводки (если нет в комплекте)', 'Фум-лента или сантехническая нить'],
+    steps: [
+      {
+        id: 's1',
+        text: 'Перекрой краны подачи холодной и горячей воды под раковиной. Открой старый кран, чтобы слить остатки воды.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's2',
+        text: 'С помощью разводного ключа аккуратно отсоедини гибкие подводки от труб водоснабжения.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's3',
+        text: 'Открути прижимную гайку под раковиной, которая удерживает кран. Возможно, понадобится фонарик для лучшего обзора.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's4',
+        text: 'Вытащи старый смеситель вместе с подводками. Очисти посадочное место на раковине от налета и герметика.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1521207418485-99c705420785?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's5',
+        text: 'Прикрути новые подводки к смесителю, установи уплотнительное кольцо и вставь кран в отверстие раковины.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1620629761511-20921f08726e?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's6',
+        text: 'Закрепи кран снизу прижимной пластиной и гайкой. Подсоедини подводки к трубам, используя фум-ленту.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's7',
+        text: 'Плавно открой воду и проверь все соединения на наличие протечек. Протри насухо и убедись, что капель нет.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&q=80&w=800'
+      }
+    ]
+  },
+  {
+    id: 't3',
+    categoryId: 'plumbing',
+    title: 'Устранение течи в соединении',
+    difficulty: 'Low',
+    estimatedTime: '15 мин',
+    tools: ['Разводной ключ', 'Сухая ветошь'],
+    materials: ['Резиновые или силиконовые прокладки', 'Фум-лента'],
+    steps: [
+      {
+        id: 's1',
+        text: 'Определи точное место течи, протерев соединение насухо. Перекрой подачу воды на этом участке.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1585704032915-c3400ca1f963?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's2',
+        text: 'Используя разводной ключ, аккуратно открути накидную гайку в месте протечки.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1621905252507-b354bcadcabc?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's3',
+        text: 'Вытащи старую прокладку. Очисти резьбу от старой фум-ленты или льна.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's4',
+        text: 'Намотай 3-5 слоев свежей фум-ленты на резьбу по направлению закручивания гайки.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's5',
+        text: 'Установи новую прокладку и плотно закрути гайку рукой, затем слегка подтяни ключом (не перетягивай!).',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&q=80&w=800'
+      }
+    ]
+  },
+  {
+    id: 't4',
+    categoryId: 'plumbing',
+    title: 'Очистка сифона раковины',
+    difficulty: 'Low',
+    estimatedTime: '20 мин',
+    tools: ['Ведро или тазик', 'Ершик или старая зубная щетка', 'Перчатки'],
+    materials: ['Мыльный раствор', 'Новое уплотнительное кольцо (при износе)'],
+    steps: [
+      {
+        id: 's1',
+        text: 'Поставь ведро под сифон, чтобы вода и мусор при разборке не попали на пол.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's2',
+        text: 'Вручную открути нижнюю часть сифона (отстойник). Если идет туго, используй тряпку для лучшего хвата.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's3',
+        text: 'Вылей содержимое в ведро. Удалите скопившийся мусор, волосы и жир.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1595113316349-9fa4ee24f884?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's4',
+        text: 'Тщательно промой все детали сифона в другой раковине или тазу с мыльным раствором, используя ершик.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1521207418485-99c705420785?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's5',
+        text: 'Проверь целостность резиновых прокладок. Если они задубели или порваны — замени их.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&q=80&w=800'
+      },
+      {
+        id: 's6',
+        text: 'Собери сифон обратно. Следи, чтобы прокладки лежали ровно. Затяни соединения руками.',
+        completed: false,
+        imageUrl: 'https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&q=80&w=800'
+      }
+    ]
   }
 ];

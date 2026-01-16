@@ -15,6 +15,7 @@
             slate: {
               750: '#1e293b',
               850: '#0f172a',
+              950: '#020617',
             }
           }
         }
@@ -27,21 +28,66 @@
       font-family: 'Inter', sans-serif;
       margin: 0;
       overflow-x: hidden;
+      /* Базовый переход для браузеров без поддержки API */
+      transition: background-color 0.8s cubic-bezier(0.5, 0, 0.1, 1);
     }
     .safe-area-bottom {
       padding-bottom: env(safe-area-inset-bottom);
     }
-    /* Smooth transition for theme switching */
-    * {
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    }
-    /* Hide scrollbar */
+    
+    /* Скрытие скроллбара */
     .custom-scrollbar::-webkit-scrollbar {
       display: none;
     }
     .custom-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
+    }
+
+    /* Мягкий View Transition */
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+
+    ::view-transition-new(root) {
+      mask-image: radial-gradient(
+        circle at var(--click-x, 50%) var(--click-y, 50%),
+        black 0%,
+        transparent 0%
+      );
+      mask-repeat: no-repeat;
+      mask-size: 100% 100%;
+      /* Плавный fade-in вместе с маской */
+      animation: reveal-soft 0.85s cubic-bezier(0.5, 0, 0.1, 1) forwards;
+    }
+
+    @keyframes reveal-soft {
+      0% {
+        mask-image: radial-gradient(
+          circle at var(--click-x) var(--click-y),
+          black 0%,
+          transparent 0%
+        );
+        opacity: 0.8;
+      }
+      100% {
+        mask-image: radial-gradient(
+          circle at var(--click-x) var(--click-y),
+          black 200%,
+          transparent 200%
+        );
+        opacity: 1;
+      }
+    }
+
+    /* Для темной темы инвертируем приоритет слоев для красоты */
+    .dark::view-transition-old(root) {
+      z-index: 100;
+    }
+    .dark::view-transition-new(root) {
+      z-index: 1;
     }
   </style>
 <script type="importmap">

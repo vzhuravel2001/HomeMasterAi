@@ -61,6 +61,51 @@ const App: React.FC = () => {
   });
 
   useEffect(() => {
+    const root = window.document.documentElement;
+    if (isDarkMode) {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = (event: React.MouseEvent) => {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    // Устанавливаем координаты для CSS анимации
+    const root = document.documentElement;
+    root.style.setProperty('--click-x', `${x}px`);
+    root.style.setProperty('--click-y', `${y}px`);
+
+    // Если браузер поддерживает View Transition API
+    if ((document as any).startViewTransition) {
+      (document as any).startViewTransition(() => {
+        const nextMode = !isDarkMode;
+        setIsDarkMode(nextMode);
+        if (nextMode) {
+          root.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          root.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    } else {
+      // Фолбэк для старых браузеров
+      const nextMode = !isDarkMode;
+      setIsDarkMode(nextMode);
+      if (nextMode) {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+  };
+
+  useEffect(() => {
     try {
       localStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(tasks));
     } catch (e) {
@@ -94,17 +139,6 @@ const App: React.FC = () => {
     }, 2800);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
 
   const handleUpdateTask = (updatedTask: Task) => {
     setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t));
@@ -155,10 +189,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen max-w-md mx-auto bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 overflow-hidden relative border-x border-slate-200 dark:border-slate-800 shadow-2xl">
+    <div className="flex flex-col h-screen max-w-md mx-auto bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden relative border-x border-slate-200 dark:border-slate-800 shadow-2xl transition-colors duration-700">
       {isInitialLoading && <SplashScreen />}
       
-      <header className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md px-6 py-4 flex justify-between items-center z-10 sticky top-0 border-b border-slate-200 dark:border-slate-700">
+      <header className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center z-20 sticky top-0 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-orange-500/20">H</div>
           <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">HomeMaster<span className="text-orange-500">AI</span></h1>
@@ -166,8 +200,8 @@ const App: React.FC = () => {
         
         <div className="flex items-center gap-2">
           <button 
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-all text-slate-600 dark:text-orange-400 shadow-sm border border-slate-200 dark:border-slate-600"
+            onClick={toggleTheme}
+            className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-orange-400 shadow-sm border border-slate-200 dark:border-slate-700"
             aria-label="Toggle Theme"
           >
             {isDarkMode ? (
@@ -186,18 +220,18 @@ const App: React.FC = () => {
             className="bg-orange-500 hover:bg-orange-600 active:scale-95 transition-all text-white p-2.5 rounded-xl shadow-lg shadow-orange-500/30 flex items-center justify-center border border-orange-400 dark:border-orange-600"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812-1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </button>
         </div>
       </header>
 
-      <main className={`flex-1 overflow-y-auto pb-20 custom-scrollbar bg-slate-50 dark:bg-slate-900 transition-opacity duration-700 ${isInitialLoading ? 'opacity-0' : 'opacity-100'}`}>
+      <main className={`flex-1 overflow-y-auto pb-20 custom-scrollbar bg-slate-50 dark:bg-slate-950 transition-opacity duration-700 ${isInitialLoading ? 'opacity-0' : 'opacity-100'}`}>
         {renderScreen()}
       </main>
 
-      <nav className={`bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-700 h-20 flex justify-around items-center px-4 safe-area-bottom fixed bottom-0 w-full max-w-md transition-transform duration-700 ${isInitialLoading ? 'translate-y-full' : 'translate-y-0'}`}>
+      <nav className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 h-20 flex justify-around items-center px-4 safe-area-bottom fixed bottom-0 w-full max-w-md transition-transform duration-700 ${isInitialLoading ? 'translate-y-full' : 'translate-y-0'}`}>
         <NavButton active={activeTab === AppTab.HOME} icon="🏠" label="Домой" onClick={() => {setActiveTab(AppTab.HOME); setSelectedCategory(null); setSelectedTaskId(null);}} />
         <NavButton active={activeTab === AppTab.MAPS} icon="📍" label="Карты" onClick={() => setActiveTab(AppTab.MAPS)} />
         <NavButton active={activeTab === AppTab.CHAT} icon="💬" label="Чат" onClick={() => setActiveTab(AppTab.CHAT)} />
